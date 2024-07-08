@@ -1,8 +1,8 @@
 # aiagent
 
-[![Gem Version](https://badge.fury.io/rb/claude-ruby.svg)](https://badge.fury.io/rb/claude-ruby) [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Maintainability](https://api.codeclimate.com/v1/badges/08c7e7b58e9fbe7156eb/maintainability)](https://codeclimate.com/github/webventures/claude-ruby/maintainability) [![CI](https://github.com/webventures/claude-ruby/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/webventures/claude-ruby/actions/workflows/ci.yml)
+[![Gem Version](https://badge.fury.io/rb/aiagent.svg)](https://badge.fury.io/rb/aiagent) [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-`claude-ruby` gem is an unofficial ruby SDK for interacting with the Anthropic API, for generating and streaming messages through Claude
+** Example usage coming soon in the next version of this gem **
 
 ## Installation
 
@@ -37,8 +37,6 @@ require "ai_agent/ai_agent/claude"
 To use this gem you'll need an API key for the agents that you want to use.
 
 Set your API keys as environment variables.
-
-** Example usage coming soon in the next version of this gem **
 
 ## Changelog
 

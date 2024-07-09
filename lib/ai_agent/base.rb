@@ -4,6 +4,9 @@ require 'json'
 module AiAgent
   class Base
     attr_accessor :agent
+    attr_accessor :api_key
+    attr_accessor :endpoint
+    attr_accessor :timeout
 
     def initialize
       # be sure to set agent in the subclass initialize method

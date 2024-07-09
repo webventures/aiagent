@@ -2,8 +2,6 @@
 
 [![Gem Version](https://badge.fury.io/rb/aiagent.svg)](https://badge.fury.io/rb/aiagent) [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-** Example usage coming soon in the next version of this gem **
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -29,14 +27,66 @@ $ gem install aiagent
 Create an initializer called config/initializers/ai_agent.rb \
 And in that file simply require the agents that you'll use in your project.
 
-E.g. \
-require "ai_agent/ai_agent/claude"
+Example initializer:
+```ruby
+# config/initializers/ai_agent.rb
 
-## Usage
+require "ai_agent/ai_agent/claude"
+```
+## Setup
 
 To use this gem you'll need an API key for the agents that you want to use.
 
-Set your API keys as environment variables.
+Set your API keys as environment variables, or pass them to the AiAgent initialize method.
+
+Example with environment variables:
+```ruby
+# ENV['ANTHROPIC_API_KEY'] = 'YOUR_ANTHROPIC_API_KEY'
+
+ai_agent = AiAgent::Claude.new
+```
+
+Example passing the api_key to the initalizer:
+```ruby
+ai_agent = AiAgent::Claude.new(api_key: 'ANTHROPIC_API_KEY')
+```
+
+## Usage
+
+Basic example usage for Claude:
+
+```ruby
+ai_agent = AiAgent::Claude.new(timeout: 30)
+prompt = "Generate 5 inspirational quotes."
+messages = [{ 'role': 'user', 'content': prompt }]
+options = {}
+response = ai_agent.send_messages(messages, options)
+ai_agent.format_response(response)
+```
+
+Sentiment analysis:
+```ruby
+ai_agent = AiAgent::Claude.new
+review = "The product quality is excellent and the customer service was very helpful!"
+response = ai_agent.analyze_sentiment(review, options: { model: Claude::Model::CLAUDE_CHEAPEST })
+ai_agent.format_response(response)
+```
+
+Named entity recognition:
+```ruby
+ai_agent = AiAgent::Claude.new
+abstract = "Anthropic released Claude 3.5 Sonnet on 21 June 2024."
+response = ai_agent.recognize_entities(abstract, options: { model: Claude::Model::CLAUDE_CHEAPEST })
+ai_agent.format_response(response)
+```
+
+Text summarization:
+```ruby
+ai_agent = AiAgent::Claude.new
+abstract = "A long message" # customise this for your own example
+response = ai_agent.summarize_text(abstract, strict: false, options: { model: Claude::Model::CLAUDE_SMARTEST })
+ai_agent.format_response(response)
+```
 
 ## Changelog
 

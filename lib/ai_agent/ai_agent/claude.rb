@@ -9,9 +9,11 @@ module AiAgent
   CLAUDE = 'claude'.freeze
 
   class Claude < Base
-    def initialize
-      super
+    def initialize(api_key: nil, endpoint: nil, timeout: 60)
       self.agent = CLAUDE
+      self.api_key = api_key || ENV['ANTHROPIC_API_KEY']
+      self.endpoint = endpoint # nil for default as defined in claude/client
+      self.timeout = timeout
     end
 
     def client
@@ -29,11 +31,7 @@ module AiAgent
     private
 
     def claude
-      @claude ||= ::Claude::Client.new(anthropic_api_key)
-    end
-
-    def anthropic_api_key
-      @anthropic_api_key ||= ENV['ANTHROPIC_API_KEY']
+      @claude ||= ::Claude::Client.new(api_key, endpoint: endpoint, timeout: timeout)
     end
   end
 end

@@ -1,3 +1,7 @@
+## [0.3.1] - 2024-07-10
+
+- Fixed gemspec
+
 ## [0.3.0] - 2024-07-09
 
 - Added OpenAI support

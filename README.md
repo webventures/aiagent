@@ -32,7 +32,17 @@ Example initializer:
 # config/initializers/ai_agent.rb
 
 require "ai_agent/ai_agent/claude"
+require "ai_agent/ai_agent/open_ai"
 ```
+
+You'll also need to add supporting gems to your Gemfile for each of the agents that you enable.
+
+```ruby
+gem 'claude-ruby'
+gem 'ruby-openai'
+```
+
+
 ## Setup
 
 To use this gem you'll need an API key for the agents that you want to use.
@@ -41,7 +51,7 @@ Set your API keys as environment variables, or pass them to the AiAgent initiali
 
 Example with environment variables:
 ```ruby
-# ENV['ANTHROPIC_API_KEY'] = 'YOUR_ANTHROPIC_API_KEY'
+ENV['ANTHROPIC_API_KEY'] = 'YOUR_ANTHROPIC_API_KEY'
 
 ai_agent = AiAgent::Claude.new
 ```

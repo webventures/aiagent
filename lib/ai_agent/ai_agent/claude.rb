@@ -20,7 +20,23 @@ module AiAgent
       claude if agent == CLAUDE
     end
 
-    def send_messages(messages, options)
+    # When using the 'chat' interface we need to do a bit of rejigging because
+    # Claude expects the system message to be in options instead of messages.
+    def chat(messages, options: {})
+      system_content = nil
+      messages.reject! do |hash|
+        if hash[:role] == 'system'
+          system_content = hash[:content]
+          true
+        else
+          false
+        end
+      end
+
+      send_messages(messages, options: options.reverse_merge(system: system_content))
+    end
+
+    def send_messages(messages, options: {})
       client.messages(messages, options)
     end
 

@@ -53,16 +53,52 @@ ai_agent = AiAgent::Claude.new(api_key: 'ANTHROPIC_API_KEY')
 
 ## Usage
 
-Basic example usage for Claude:
+Basic example usage for OpenAI ChatGPT:
+
+```ruby
+ai_agent = AiAgent::OpenAI.new(timeout: 30)
+prompt = "Generate 5 inspirational quotes."
+messages = [{ 'role': 'user', 'content': prompt }]
+response = ai_agent.chat(messages, options: {})
+ai_agent.format_response(response)
+```
+
+Basic example usage for Anthropic Claude:
 
 ```ruby
 ai_agent = AiAgent::Claude.new(timeout: 30)
 prompt = "Generate 5 inspirational quotes."
 messages = [{ 'role': 'user', 'content': prompt }]
-options = {}
-response = ai_agent.send_messages(messages, options)
+response = ai_agent.chat(messages, options: {})
 ai_agent.format_response(response)
 ```
+
+
+At the API level Claude 'system' message needs to be a parameter in the options rather than an element in the messages array.
+
+Using AiAgent you have the choice of using a Claude-specific 'send_messages' method which takes the data in the format expected by Claude, or you can use  the more standard 'chat' interface, which follows the openai convention and will be mapped seamlessly by AiAgent.
+
+Example using send_messages:
+
+```ruby
+ai_agent = AiAgent::Claude.new(timeout: 30)
+prompt = "Generate 5 inspirational quotes."
+messages = [{ 'role': 'user', 'content': prompt }]
+response = ai_agent.send_messages(messages, options: { system: 'Reply only in Spanish.' })
+ai_agent.format_response(response)
+```
+
+Example using chat:
+
+```ruby
+ai_agent = AiAgent::Claude.new(timeout: 30)
+prompt = "Generate 5 inspirational quotes."
+messages = [{ 'role': 'system', 'content': 'Reply only in Spanish' }, { 'role': 'user', 'content': prompt }]
+response = ai_agent.chat(messages, options: {})
+ai_agent.format_response(response)
+```
+
+## Prepared prompts
 
 Sentiment analysis:
 ```ruby

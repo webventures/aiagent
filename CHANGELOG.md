@@ -1,3 +1,7 @@
+## [0.3.0] - 2024-07-09
+
+- Added OpenAI support
+
 ## [0.2.0] - 2024-07-09
 
 - Allow API key to be set when instantiating the agent
